@@ -4,9 +4,13 @@ class Solution {
   
         // Iterate through the array 
         for (int t : nums) { 
+            if(set.contains(t)) return true;
             // Add each element into the set 
             set.add(t); 
         }
-        return (set.size()!= nums.length);
+        return false;
+        //return (set.size()!= nums.length);
+
+        
     }
 }
