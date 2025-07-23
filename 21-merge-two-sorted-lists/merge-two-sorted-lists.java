@@ -10,23 +10,22 @@
  */
 class Solution {
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        if(list1!=null && list2!=null){
-            if(list1.val< list2.val){
-                System.out.println("list1.val= "+ list1.val);
-                System.out.println("list2.val= "+ list2.val);
-                list1.next= mergeTwoLists(list1.next, list2);
-                System.out.println("list1.next= "+ list1.next);
-                return list1; 
-                }
-                else{
-                    list2.next= mergeTwoLists(list1, list2.next);
-                    System.out.println("list2.next= "+ list2.next);
-
-                    return list2;
-                }
-            } 
-            if(list1==null) return list2;
-            return list1;                                                                                                                                                                                                         }
+        ListNode list3=new ListNode(0);
+        ListNode cur=list3;
+        
+        while(list1!=null&&list2!=null){
+            if(list1.val>list2.val){
+                cur.next=list2;
+                list2=list2.next;
+            }else{
+                cur.next=list1;
+                list1=list1.next;
+            }
+            cur=cur.next;
+        }
+        if(list1==null) cur.next=list2;
+        else if(list2==null) cur.next=list1;
+        return list3.next;                                                                                                                                                                                                      }
 
         }
 
