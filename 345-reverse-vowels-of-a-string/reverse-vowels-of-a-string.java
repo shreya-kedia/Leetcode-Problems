@@ -1,29 +1,23 @@
 class Solution {
     public String reverseVowels(String s) {
+       Set<Character> vowels = Set.of(
+            'a','e','i','o','u','A','E','I','O','U'
+        );
+
         char[] chars = s.toCharArray();
-        int left = 0, right = s.length() - 1;
+        int l = 0, r = chars.length - 1;
 
-       while(left<right){
-         while(left<right && !isVowel(chars[left])){
-            left++;
-         }
-         while(left<right && !isVowel(chars[right])){
-            right--;
-         }
-         char temp = chars[left];
-            chars[left] = chars[right];
-            chars[right] = temp;
+        while (l < r) {
+            while (l < r && !vowels.contains(chars[l])) l++;
+            while (l < r && !vowels.contains(chars[r])) r--;
 
-            left++;
-            right--;
-       }
+            char temp = chars[l];
+            chars[l++] = chars[r];
+            chars[r--] = temp;
+        }
         return new String(chars);
-        
+
     }
-     public boolean isVowel(char c){
-        char v=Character.toLowerCase(c);
-        if(v=='a' || v=='e' || v=='i' || v=='o' || v=='u')
-            return true;
-        return false;
-    }
+
+
 }
