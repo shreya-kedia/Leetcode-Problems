@@ -7,8 +7,11 @@ class Solution {
             maxCandies = Math.max(maxCandies, candy);
 
         }
+
+        int threshold = maxCandies - extraCandies;
+
         for(int candy : candies){
-            result.add(candy + extraCandies >= maxCandies);
+            result.add(candy >= threshold);
 
         }
 
