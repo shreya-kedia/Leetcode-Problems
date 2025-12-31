@@ -1,18 +1,27 @@
 class Solution {
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
-        if(n==0) return true;
-        int m=flowerbed.length;
+       //Solution without mofiying array : Counting zero approach
+       int count = 0;
+        int prev = -1; // index of last planted flower
 
-        for(int i=0;i<m;i++){
-            if(flowerbed[i]==0 && (i==0 || flowerbed[i-1]==0) && (i==m-1 ||flowerbed[i+1]==0)){
-                flowerbed[i]=1;
-                n--;
-                if(n==0) return true;
+        for (int i = 0; i < flowerbed.length; i++) {
+            if (flowerbed[i] == 1) {
+                if (prev < 0) {
+                    count += i / 2;
+                } else {
+                    count += (i - prev - 2) / 2;
+                }
+                prev = i;
             }
-            
         }
 
-        return false;
+        // handle trailing zeros
+        if (prev < 0) {
+            count += (flowerbed.length + 1) / 2;
+        } else {
+            count += (flowerbed.length - prev - 1) / 2;
+        }
 
+        return count >= n;
     }
 }
